@@ -1,0 +1,26 @@
+<!-- ✅ index.html (login page structure - starting point) --><!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KPFF Login</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="login-container">
+    <h2>🔐 Login to KPFF</h2>
+    <form id="loginForm">
+      <input type="tel" placeholder="Phone Number" required maxlength="11">
+      <input type="password" placeholder="6-digit Password" required maxlength="6">
+      <button type="submit">Login</button>
+    </form>
+    <p>Don't have an account? <a href="#" onclick="goToRegister()">Create one</a></p>
+    <p><a href="#" onclick="goToReset()">Forgot Password?</a></p>
+  </div>  <script>
+    function goToRegister() {
+      // Load registration form
+    }
+    function goToReset() {
+      // Load password reset form
+    }
+  </script></body>
+            </html>
