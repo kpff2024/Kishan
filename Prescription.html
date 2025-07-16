@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>নতুন প্রেসক্রিপশন</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      background: #f5f5f5;
+      padding: 20px;
+    }
+    .form-container {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 900px;
+      margin: auto;
+    }
+    .form-container h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    input, textarea, select {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 12px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .med-group {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .med-container {
+      margin-bottom: 20px;
+    }
+    button {
+      background-color: #0077b6;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button.delete-btn {
+      background: crimson;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="form-container">
+    <h2>নতুন প্রেসক্রিপশন</h2>
+    <form id="prescriptionForm">
+      
+      <!-- আইডি -->
+      <label>প্রেসক্রিপশন আইডি:</label>
+      <input type="text" id="prescriptionId" readonly>
+
+      <!-- খামারির তথ্য -->
+      <label>খামার মালিকের নাম:</label>
+      <input type="text" required>
+      <label>ফোন নাম্বার:</label>
+      <input type="tel" required>
+      <label>ঠিকানা:</label>
+      <input type="text" required>
+      <label>খামারি ধরন:</label>
+      <input type="text" required>
+
+      <!-- রোগ -->
+      <label>সমস্যা / লক্ষণ:</label>
+      <textarea required></textarea>
+      <label>পরীক্ষা:</label>
+      <textarea></textarea>
+      <label>রোগ:</label>
+      <input type="text">
+
+      <!-- ওষুধ -->
+      <div class="med-container">
+        <label>মেডিসিন:</label>
+        <div id="medicineList"></div>
+        <button type="button" onclick="addMedicine()">➕ ওষুধ যোগ করুন</button>
+      </div>
+
+      <!-- নোট -->
+      <label>নোট:</label>
+      <textarea></textarea>
+
+      <!-- ডাক্তার -->
+      <label>ডাক্তারের নাম:</label>
+      <input type="text" value="ডা. তাজউদ্দিন" readonly>
+
+      <!-- সাবমিট -->
+      <button type="submit">📥 প্রেসক্রিপশন ডাউনলোড করুন</button>
+
+    </form>
+  </div>
+
+  <script>
+    // অটো জেনারেট প্রেসক্রিপশন আইডি (৮ সংখ্যা)
+    document.getElementById('prescriptionId').value = Math.floor(10000000 + Math.random() * 90000000);
+
+    function addMedicine() {
+      const medDiv = document.createElement('div');
+      medDiv.className = 'med-group';
+      medDiv.innerHTML = `
+        <input type="text" placeholder="ওষুধের নাম" required>
+        <input type="text" placeholder="কয় বেলা">
+        <input type="text" placeholder="কখন">
+        <input type="text" placeholder="কত দিন">
+        <button type="button" class="delete-btn" onclick="this.parentNode.remove()">❌</button>
+      `;
+      document.getElementById('medicineList').appendChild(medDiv);
+    }
+
+    document.getElementById('prescriptionForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert("✅ প্রেসক্রিপশন ডাউনলোড অপশন পরের ধাপে যুক্ত হবে!");
+    });
+  </script>
+
+</body>
+  </html>
