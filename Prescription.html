@@ -2,125 +2,162 @@
 <html lang="bn">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>নতুন প্রেসক্রিপশন</title>
-  <link rel="stylesheet" href="style.css">
+  <title>প্রেসক্রিপশন</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <style>
     body {
-      background: #f5f5f5;
-      padding: 20px;
+      background: #f0f0f0;
+      font-family: 'Arial', sans-serif;
     }
-    .form-container {
+    .wrapper {
+      max-width: 800px;
+      margin: 20px auto;
       background: white;
       padding: 20px;
       border-radius: 10px;
-      max-width: 900px;
-      margin: auto;
     }
-    .form-container h2 {
+
+    #prescriptionPreview {
+      background: white;
+      width: 794px; /* A4 width in px @96dpi */
+      height: 1123px; /* A4 height in px @96dpi */
+      padding: 30px;
+      position: relative;
+      color: black;
+      font-size: 14px;
+      font-family: 'Siyam Rupali', 'Noto Sans Bengali', sans-serif;
+    }
+
+    .top-header {
+      height: 3in;
+      border-bottom: 2px solid black;
       text-align: center;
-      margin-bottom: 20px;
+      padding: 10px;
     }
-    input, textarea, select {
-      width: 100%;
-      padding: 8px;
-      margin-bottom: 12px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
+
+    .farmer-info {
+      margin-top: 20px;
+      height: 1in;
+      font-weight: bold;
     }
-    .med-group {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 10px;
-      margin-bottom: 10px;
+
+    .prescription-body {
+      display: flex;
+      height: calc(100% - 7in);
+      border-top: 2px solid black;
+      border-bottom: 2px solid black;
+      margin: 20px 0;
     }
-    .med-container {
-      margin-bottom: 20px;
+
+    .left-col {
+      width: 50%;
+      padding: 10px;
+      border-right: 2px solid black;
+    }
+
+    .right-col {
+      width: 50%;
+      padding: 10px;
+    }
+
+    .medicine {
+      margin-bottom: 5px;
+    }
+
+    .footer {
+      height: 3in;
+      text-align: center;
+      border-top: 2px solid black;
+      font-size: 13px;
+      padding-top: 10px;
+    }
+
+    .signature {
+      position: absolute;
+      bottom: 3.3in;
+      right: 40px;
+      font-weight: bold;
+    }
+
+    .download-btn {
+      margin-top: 20px;
+      text-align: center;
     }
     button {
-      background-color: #0077b6;
+      background: green;
       color: white;
-      padding: 10px 15px;
       border: none;
-      border-radius: 5px;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 8px;
       cursor: pointer;
-    }
-    button.delete-btn {
-      background: crimson;
     }
   </style>
 </head>
 <body>
 
-  <div class="form-container">
-    <h2>নতুন প্রেসক্রিপশন</h2>
-    <form id="prescriptionForm">
-      
-      <!-- আইডি -->
-      <label>প্রেসক্রিপশন আইডি:</label>
-      <input type="text" id="prescriptionId" readonly>
-
-      <!-- খামারির তথ্য -->
-      <label>খামার মালিকের নাম:</label>
-      <input type="text" required>
-      <label>ফোন নাম্বার:</label>
-      <input type="tel" required>
-      <label>ঠিকানা:</label>
-      <input type="text" required>
-      <label>খামারি ধরন:</label>
-      <input type="text" required>
-
-      <!-- রোগ -->
-      <label>সমস্যা / লক্ষণ:</label>
-      <textarea required></textarea>
-      <label>পরীক্ষা:</label>
-      <textarea></textarea>
-      <label>রোগ:</label>
-      <input type="text">
-
-      <!-- ওষুধ -->
-      <div class="med-container">
-        <label>মেডিসিন:</label>
-        <div id="medicineList"></div>
-        <button type="button" onclick="addMedicine()">➕ ওষুধ যোগ করুন</button>
+  <div class="wrapper">
+    <div id="prescriptionPreview">
+      <div class="top-header">
+        <h2>প্রেসক্রিপশন</h2>
+        <p>প্রেস্ক্রিপশন আইডি: PRX-87453925</p>
+        <p>তারিখ: ১৫ জুলাই ২০২৫</p>
       </div>
 
-      <!-- নোট -->
-      <label>নোট:</label>
-      <textarea></textarea>
+      <div class="farmer-info">
+        নাম: মোঃ রফিক, ফোন: ০১৭xxxxxxxx, ঠিকানা: জামালপুর, খামার: ব্রয়লার
+      </div>
 
-      <!-- ডাক্তার -->
-      <label>ডাক্তারের নাম:</label>
-      <input type="text" value="ডা. তাজউদ্দিন" readonly>
+      <div class="prescription-body">
+        <div class="left-col">
+          <h4>রোগের লক্ষণ</h4>
+          <p>ডানা ঝুলে পড়া, খাওয়ার রুচি নেই</p>
 
-      <!-- সাবমিট -->
-      <button type="submit">📥 প্রেসক্রিপশন ডাউনলোড করুন</button>
+          <h4>পরীক্ষা</h4>
+          <p>রক্ত পরীক্ষা, বিষক্রিয়া</p>
 
-    </form>
+          <h4>রোগ</h4>
+          <p>নিউক্যাসল ডিজিজ</p>
+        </div>
+
+        <div class="right-col">
+          <h4>ওষুধসমূহ</h4>
+          <div class="medicine">1. Bioxin - সকালে, ৩ বেলা, ৫ দিন</div>
+          <div class="medicine">2. Livol - রাতে, ২ বেলা, ৭ দিন</div>
+          <div class="medicine">3. C-vet - দুপুরে, ১ বেলা, ৩ দিন</div>
+
+          <h4>নোট</h4>
+          <p>প্রতিদিন পরিচ্ছন্নতা বজায় রাখুন। খামার বন্ধ রাখুন।</p>
+        </div>
+      </div>
+
+      <div class="signature">
+        ডাক্তার: ডা. মেহেদী হাসান
+      </div>
+
+      <div class="footer">
+        <p>মেসার্স কিষাণ পোল্ট্রি এন্ড ফিস ফিড, কলেজ রোড, জামালপুর</p>
+        <p>ফোন: ০১৯০৬৭২৪২৫৯ | ই-মেইল: kpff2024@gmail.com</p>
+        <p>Web: https://kpff2024.github.io</p>
+      </div>
+    </div>
+
+    <div class="download-btn">
+      <button onclick="downloadPrescription()">📥 PNG ডাউনলোড করুন</button>
+    </div>
   </div>
 
   <script>
-    // অটো জেনারেট প্রেসক্রিপশন আইডি (৮ সংখ্যা)
-    document.getElementById('prescriptionId').value = Math.floor(10000000 + Math.random() * 90000000);
-
-    function addMedicine() {
-      const medDiv = document.createElement('div');
-      medDiv.className = 'med-group';
-      medDiv.innerHTML = `
-        <input type="text" placeholder="ওষুধের নাম" required>
-        <input type="text" placeholder="কয় বেলা">
-        <input type="text" placeholder="কখন">
-        <input type="text" placeholder="কত দিন">
-        <button type="button" class="delete-btn" onclick="this.parentNode.remove()">❌</button>
-      `;
-      document.getElementById('medicineList').appendChild(medDiv);
+    function downloadPrescription() {
+      const element = document.getElementById('prescriptionPreview');
+      html2canvas(element).then(canvas => {
+        const link = document.createElement('a');
+        link.download = 'prescription.png';
+        link.href = canvas.toDataURL();
+        link.click();
+      });
     }
-
-    document.getElementById('prescriptionForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      alert("✅ প্রেসক্রিপশন ডাউনলোড অপশন পরের ধাপে যুক্ত হবে!");
-    });
   </script>
 
 </body>
-  </html>
+</html>
